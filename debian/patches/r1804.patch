@@ -1,0 +1,48 @@
+--- a/plugins/Devices/CDRom/CDView.vala
++++ b/plugins/Devices/CDRom/CDView.vala
+@@ -136,8 +136,9 @@
+         }
+     }
+     
+-    public Granite.Widgets.WrapLabel create_title_label (string title) {
+-        var label = new Granite.Widgets.WrapLabel (title);
++    public Gtk.Label create_title_label (string title) {
++        var label = new Gtk.Label (title);
++        label.set_halign (Gtk.Align.START);
+         label.set_justify(Gtk.Justification.LEFT);
+         label.set_alignment(0, 0);
+         label.set_hexpand (true);
+--- a/src/Dialogs/FileNotFoundDialog.vala
++++ b/src/Dialogs/FileNotFoundDialog.vala
+@@ -62,11 +62,11 @@
+              body_string = (_("%i music files could not be found?").printf (media_list.size));
+         }
+ 
+-        var info = new Granite.Widgets.WrapLabel (("<span weight=\"bold\" size=\"larger\">%s</span>").printf
++        var info = new Gtk.Label (("<span weight=\"bold\" size=\"larger\">%s</span>").printf
+             (String.escape (title_string)) + "\n\n" + ("%s").printf (body_string)
+         );
+ 
+-        info.m_wrap_width = 350;
++        info.set_halign (Gtk.Align.START);
+         info.set_selectable (true);
+         info.set_use_markup (true);
+ 
+--- a/src/Dialogs/InstallGstreamerPluginsDialog.vala
++++ b/src/Dialogs/InstallGstreamerPluginsDialog.vala
+@@ -40,13 +40,13 @@
+         var question = new Gtk.Image.from_icon_name ("dialog-question", Gtk.IconSize.DIALOG);
+         question.yalign = 0;
+ 
+-        var info = new Granite.Widgets.WrapLabel ("<span weight=\"bold\" size=\"larger\">" +
++        var info = new Gtk.Label ("<span weight=\"bold\" size=\"larger\">" +
+             _("Would you like to install the %s plugin?\n").printf (String.escape (detail)) +
+             "</span>" + _("\nThis song cannot be played. The %s plugin is required to play the song.").printf ("<b>" +
+             String.escape (detail) + "</b>")
+         );
+ 
+-        info.m_wrap_width = 350;
++        info.set_halign (Gtk.Align.START);
+         info.set_selectable (true);
+         info.set_use_markup (true);
+ 
